@@ -11,5 +11,4 @@ This category contains information on how to use STARCH to create programs for P
     syntax
     operators
     flow
-    core
-    potato_os
+    gui
