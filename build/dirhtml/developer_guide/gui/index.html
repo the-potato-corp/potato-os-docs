@@ -780,68 +780,6 @@
 </pre></div>
 </div>
 </section>
-<section id="complete-example">
-<h2>Complete Example<a class="headerlink" href="#complete-example" title="Link to this heading">¶</a></h2>
-<p>Here’s a complete example combining multiple widgets:</p>
-<div class="highlight-starch notranslate"><div class="highlight"><pre><span></span><span class="kn">using</span> <span class="n">gui</span><span class="p">;</span>
-<span class="kn">using</span> <span class="n">Colour</span> <span class="kn">from</span> <span class="n">graphics</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="n">window</span> <span class="o">=</span> <span class="n">gui</span><span class="p">.</span><span class="nf">Window</span><span class="p">();</span>
-<span class="n">window</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="s2">&quot;Task Manager&quot;</span><span class="p">);</span>
-
-<span class="c1">// Main container</span>
-<span class="kd">var</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">gui</span><span class="p">.</span><span class="nf">FlexBox</span><span class="p">();</span>
-<span class="n">layout</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">direction</span><span class="p">(</span><span class="s2">&quot;vertical&quot;</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">gap</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">fill</span><span class="p">()</span>
-        <span class="ow">~&gt;</span> <span class="n">window</span><span class="p">.</span><span class="nf">add_content</span><span class="p">();</span>
-
-<span class="c1">// Title</span>
-<span class="n">gui</span><span class="p">.</span><span class="nf">Text</span><span class="p">()</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">text</span><span class="p">(</span><span class="s2">&quot;[b][color=blue]Welcome to Task Manager[/color][/b]&quot;</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">align</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">height</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="n">layout</span><span class="p">.</span><span class="nf">add</span><span class="p">();</span>
-
-<span class="c1">// Input section</span>
-<span class="kd">var</span> <span class="n">input_box</span> <span class="o">=</span> <span class="n">gui</span><span class="p">.</span><span class="nf">FlexBox</span><span class="p">();</span>
-<span class="n">input_box</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">direction</span><span class="p">(</span><span class="s2">&quot;horizontal&quot;</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">gap</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">height</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="n">task_input</span> <span class="o">=</span> <span class="n">gui</span><span class="p">.</span><span class="nf">Input</span><span class="p">();</span>
-<span class="n">task_input</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">placeholder</span><span class="p">(</span><span class="s2">&quot;Enter task name...&quot;</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">expand</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-
-<span class="n">gui</span><span class="p">.</span><span class="nf">Button</span><span class="p">()</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">text</span><span class="p">(</span><span class="s2">&quot;Add Task&quot;</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">on_click</span><span class="p">(</span><span class="n">add_task</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">width</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="n">input_box</span><span class="p">.</span><span class="nf">add</span><span class="p">();</span>
-
-<span class="n">task_input</span> <span class="ow">~&gt;</span> <span class="n">input_box</span><span class="p">.</span><span class="nf">add</span><span class="p">();</span>
-<span class="n">input_box</span> <span class="ow">~&gt;</span> <span class="n">layout</span><span class="p">.</span><span class="nf">add</span><span class="p">();</span>
-
-<span class="c1">// Task list</span>
-<span class="kd">var</span> <span class="n">task_list</span> <span class="o">=</span> <span class="n">gui</span><span class="p">.</span><span class="nf">Scroll</span><span class="p">();</span>
-<span class="n">task_list</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">expand</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="p">.</span><span class="nf">scrollbars</span><span class="p">(</span><span class="s2">&quot;never&quot;</span><span class="p">,</span> <span class="s2">&quot;auto&quot;</span><span class="p">)</span>
-        <span class="ow">~&gt;</span> <span class="n">layout</span><span class="p">.</span><span class="nf">add</span><span class="p">();</span>
-
-<span class="kd">function</span> <span class="nf">add_task</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="n">text</span> <span class="o">=</span> <span class="n">task_input</span><span class="p">.</span><span class="nf">get_text</span><span class="p">();</span>
-        <span class="k">if</span> <span class="n">text</span><span class="p">.</span><span class="nf">length</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
-                <span class="nf">print</span><span class="p">(</span><span class="s2">&quot;Added task: &quot;</span> <span class="o">~</span> <span class="n">text</span><span class="p">);</span>
-                <span class="n">task_input</span><span class="p">.</span><span class="nf">text</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
 </section>
 
         </article>
@@ -919,7 +857,6 @@
 <li><a class="reference internal" href="#input">Input</a></li>
 <li><a class="reference internal" href="#editor">Editor</a></li>
 <li><a class="reference internal" href="#image">Image</a></li>
-<li><a class="reference internal" href="#complete-example">Complete Example</a></li>
 </ul>
 </li>
 </ul>
