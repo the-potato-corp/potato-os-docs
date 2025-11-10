@@ -21,7 +21,7 @@ Developers:
 	**Build applications using STARCH.** Dive into the core language syntax and learn how to leverage PotatoOS's native APIs.
 
 	* :doc:`STARCH Language Reference <developer_guide/introduction>`
-	* :doc:`System Programming (Native APIs) <developer_guide/potato_os>`
+	* :doc:`The GUI Module <developer_guide/gui>`
 	* :doc:`Your First Program <getting_started/quickstart>`
 
 Explore the System
