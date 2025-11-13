@@ -1,37 +1,37 @@
 name: Deploy Docs to Website
 
 on:
-	push:
-		branches: [main]
-		paths:
-			- 'docs/**'
-	workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+  workflow_dispatch:
 
 jobs:
-	deploy:
-		runs-on: ubuntu-latest
-		
-		steps:
-			- name: Checkout docs repo
-			  uses: actions/checkout@v4
-			
-			- name: Checkout website repo
-			  uses: actions/checkout@v4
-			  with:
-				  repository: the-potato-corp/potato-os-website
-				  token: ${{ secrets.WEBSITE_DEPLOY_TOKEN }}
-				  path: website
-			
-			- name: Copy docs to website
-			  run: |
-				  rm -rf website/docs
-				  cp -r docs website/docs
-			
-			- name: Commit and push to website
-			  run: |
-				  cd website
-				  git config user.name "GitHub Actions"
-				  git config user.email "actions@github.com"
-				  git add docs
-				  git commit -m "Update docs from potato-os-docs@${{ github.sha }}" || echo "No changes"
-				  git push 
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+      
+      - name: Checkout website repo
+        uses: actions/checkout@v4
+        with:
+          repository: the-potato-corp/potato-os-website
+          token: ${{ secrets.WEBSITE_DEPLOY_TOKEN }}
+          path: website
+      
+      - name: Copy docs to website
+        run: |
+          rm -rf website/docs
+          cp -r docs website/docs
+      
+      - name: Commit and push to website
+        run: |
+          cd website
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add docs
+          git commit -m "Update docs from potato-os-docs@${{ github.sha }}" || echo "No changes"
+          git push
